@@ -1,0 +1,26 @@
+[
+  {
+    "city": "Ангарск",
+    "topics":
+    [
+      {"topic": "Frontend разработчик (стажер)",
+      "skills": ["JavaScript", "React", "Angular"],
+      "url": "https://edu.greenatom.ru/trainee/form/48483/66/"
+      },
+      {"topic": "Backend разработчик (стажер)",
+      "skills": ["C#", "OData", "SOAP", "SQL", "MS", "ASP.NET", "Web API", "SharePoint", "Excel"],
+      "url": "https://edu.greenatom.ru/trainee/form/48485/66/"
+      },
+      {"topic": "2-ая линия поддержки (стажер)",
+      "skills": ["уверенный пользователь ПК"],
+      "url": "https://edu.greenatom.ru/trainee/form/48573/66/"
+      },
+      {"topic": "Менеджер услуги (стажер)",
+      "skills": ["PowerPoint", "Word", "Excel", "Коммуникабельны", "опыт ведения переговоров", "Service Desk", "ITIL", "COBIT", "Клиенториентированность"],
+      "url": "https://edu.greenatom.ru/trainee/form/48765/66/"
+      }
+    ]
+
+  }
+
+]

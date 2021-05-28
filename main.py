@@ -1,5 +1,8 @@
 import io
 import os
+import sys
+import threading
+
 import requests
 
 from lxml import etree
@@ -11,7 +14,8 @@ from bs4 import BeautifulSoup
 
 from typing import Optional
 from fastapi import FastAPI, File, UploadFile
-
+sys.setrecursionlimit(100000)
+threading.stack_size(0x2000000)
 app = FastAPI()
 
 
@@ -35,14 +39,20 @@ def extract_text_from_pdf(file):
     if text:
         return text
 
-@app.get("/")
-async def root():
+def getCountries():
     r = requests.get("https://edu.greenatom.ru/")  # url - ссылка
     htmls = r.text
-    htmlparser = etree.HTMLParser()
-    tree = etree.parse(htmls, htmlparser)
-    images = tree.find_all('form')
-    return images
+    strr = htmls.split('form')[2]
+    all = strr.split('\" >')
+    list_el = []
+    for i in all:
+        list_el += [i.split('</option>')[0]]
+    list_el[0] = list_el[0].split("cted>")[1]
+    return list_el
+
+@app.get("/")
+async def root():
+    return getCountries()
 
 @app.post("/getInter")
 async def getInter(file: UploadFile = File(...)):
