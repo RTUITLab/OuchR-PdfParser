@@ -57,7 +57,7 @@ def getIntUrl(text):
         if w not in stopWords:
             wordsFiltered.append(w)
 
-    cit = find_country(wordsFiltered,["Ангарск","Балаково","Владимир","Волгодонск","Глазов","Димитровград","Екатеринбург","Зеленогорск","Казань","Ковров","Москва","Мурманск","Нижний Новгород","Новосибирск","Новоуральск","Подольск","Ростов-на-Дону","Санкт-Петербург","Саров","Северск","Томск","Уфа","Электросталь","Вся Россия"])
+    cit = find_country(wordsFiltered,["Ангарск","Москва","Вся Россия"])
     #print("Testt",len(text),text)
     with open('city.json', 'r', encoding='utf-8') as fp:
         city_data = fp.read()
@@ -74,12 +74,9 @@ def getIntUrl(text):
         arr[str(num)] = line_numbers(read_file, i['skills'])
     arr = sort(arr)
     # print(arr[-1])
-
-    data_json = "["
+    data_json = []
     for i in range(len(arr)):
-        data_json += str(topics[int(arr[len(arr)-i-1][0])])+','
-    # data = [topics[int(arr[-1][0])],topics[int(arr[-1][0])],topics[int(arr[-1][0])],topics[int(arr[-1][0])]]
-    data_json = data_json[0:-1]+']'
+        data_json.append(topics[int(arr[len(arr)-i-1][0])])
     return data_json
 
 def sort(d):

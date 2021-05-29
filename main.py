@@ -2,6 +2,9 @@ import io
 import os
 import sys
 import threading
+from datetime import datetime
+import zoom
+
 import Text_NPL as tnpl
 import requests
 import uvicorn
@@ -11,6 +14,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
+from pydantic import BaseModel
 from bs4 import BeautifulSoup
 
 from typing import Optional
@@ -67,3 +71,13 @@ async def getInter(file: UploadFile = File(...)):
     str = extract_text_from_pdf(file)
     str = tnpl.getIntUrl(str)
     return str
+
+class Item(BaseModel):
+    name: str
+    time: datetime
+    duration: float
+    password: Optional[str] = 'not-secure'
+
+@app.post("/addMeet")
+async def getInter(item: Item):
+    return zoom.create_meet(item.name, item.time, item.duration, item.password)
