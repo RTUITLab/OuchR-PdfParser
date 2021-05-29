@@ -50,6 +50,8 @@ def getCountries():
     list_el[0] = list_el[0].split("cted>")[1]
     return list_el
 
+
+
 @app.get("/")
 async def root():
     return getCountries()
