@@ -3,24 +3,56 @@
     "city": "Ангарск",
     "topics":
     [
-      {"topic": "Frontend разработчик (стажер)",
+      {"title": "Frontend разработчик (стажер)",
       "skills": ["JavaScript", "React", "Angular"],
       "url": "https://edu.greenatom.ru/trainee/form/48483/66/"
       },
-      {"topic": "Backend разработчик (стажер)",
+      {"title": "Backend разработчик (стажер)",
       "skills": ["C#", "OData", "SOAP", "SQL", "MS", "ASP.NET", "Web API", "SharePoint", "Excel"],
       "url": "https://edu.greenatom.ru/trainee/form/48485/66/"
       },
-      {"topic": "2-ая линия поддержки (стажер)",
+      {"title": "2-ая линия поддержки (стажер)",
       "skills": ["уверенный пользователь ПК"],
       "url": "https://edu.greenatom.ru/trainee/form/48573/66/"
       },
-      {"topic": "Менеджер услуги (стажер)",
+      {"title": "Менеджер услуги (стажер)",
       "skills": ["PowerPoint", "Word", "Excel", "Коммуникабельны", "опыт ведения переговоров", "Service Desk", "ITIL", "COBIT", "Клиенториентированность"],
       "url": "https://edu.greenatom.ru/trainee/form/48765/66/"
       }
     ]
 
+  },
+  {
+    "city": "Москва",
+    "topics":
+    [
+      {"title": "Java-разработчик (стажер)",
+      "skills": ["Java","Java Core", "SAP", "NetWeaver","Enterprise Portal", "Business Process Management", "Master Data Management","Web Dynpro","J2EE", "Web Services", "Самостоятельность", "MDM", "Java API"],
+      "url": "https://edu.greenatom.ru/trainee/form/48758/64/"
+      },
+      {"title": "Администратор IT-проектов (стажер)",
+      "skills": ["Excel", "Word", "Excel", "PowerPoint", "Outlook", "менеджмент"],
+      "url": "https://edu.greenatom.ru/trainee/form/48738/64/"
+      },
+      {"title": "Младший экономист, помощник финансового директора",
+      "skills": ["PowerPoint","Word", "Excel", "бухучета", "МГУ", "ВШЭ", "Плеханова", "1С", "ERP"],
+      "url": "https://edu.greenatom.ru/trainee/form/48762/64/"
+      },
+      {"title": "Стажер по работе с серверным оборудованием",
+      "skills": ["ПК", "базовые знания английского языка", "кондиционирование", "ИБП", "электроснабжение"],
+      "url": "https://edu.greenatom.ru/trainee/form/48748/64/"
+      }
+    ]
+  },
+  {
+    "city": "Вся Россия",
+    "topics":
+    [
+      {"title": "Участник чемпионата AtomSkills по компетенции Сетевое и системное администрирование",
+      "skills": ["студент", "OSI", "DHCP","DNS", "NAT", "GPO","Web Dynpro","J2EE", "Power Shell", "Zebra", "Apache", "IPtables", "WorldSkills"],
+      "url": "https://edu.greenatom.ru/trainee/form/48745/116//"
+      }
+    ]
   }
 
 ]

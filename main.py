@@ -2,8 +2,9 @@ import io
 import os
 import sys
 import threading
-
+import Text_NPL as tnpl
 import requests
+import uvicorn
 
 from lxml import etree
 from pdfminer.converter import TextConverter
@@ -14,8 +15,6 @@ from bs4 import BeautifulSoup
 
 from typing import Optional
 from fastapi import FastAPI, File, UploadFile
-sys.setrecursionlimit(100000)
-threading.stack_size(0x2000000)
 app = FastAPI()
 
 
@@ -24,7 +23,7 @@ def extract_text_from_pdf(file):
     fake_file_handle = io.StringIO()
     converter = TextConverter(resource_manager, fake_file_handle)
     page_interpreter = PDFPageInterpreter(resource_manager, converter)
-    ff = os.path.basename(file.filename)
+    ff = "C:/Users/sasha/PycharmProjects/docs_back/"+file.filename
     with open(ff, 'rb') as fh:
         for page in PDFPage.get_pages(fh,
                                       caching=True,
@@ -35,6 +34,8 @@ def extract_text_from_pdf(file):
 
     converter.close()
     fake_file_handle.close()
+
+    os.remove("C:/Users/sasha/PycharmProjects/docs_back/"+file.filename)
 
     if text:
         return text
@@ -58,5 +59,11 @@ async def root():
 
 @app.post("/getInter")
 async def getInter(file: UploadFile = File(...)):
+    str = ""
+    if file.filename:
+        # strip the leading path from the file name
+        fn = "C:/Users/sasha/PycharmProjects/docs_back/"+file.filename
+        open(fn, 'wb').write(file.file.read())
     str = extract_text_from_pdf(file)
+    str = tnpl.getIntUrl(str)
     return str
