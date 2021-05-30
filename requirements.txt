@@ -115,8 +115,3 @@ uvicorn==0.13.4
 watchgod==0.7
 webkit2png==0.8.2
 websockets==8.1
-wkhtmltopdf==0.2
-xlrd==1.2.0
-XlsxWriter==1.4.3
-xmlrunner==1.7.7
-xmltodict==0.12.0
