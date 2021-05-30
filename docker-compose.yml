@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  web:
+    # Ѕерем Dockerfile из каталога app
+    image: shureck/userback
+    # «апускаем тестовый сервер
+    restart: always
+    # куда будут помещены данные из каталога app
+    # ќткрываем порт 8000 внутри и снаружи
+    ports:
+        - '6060:6060'
+  localback:
+    image: shureck/localback
+    # куда будут помещены данные из каталога app
+    # ќткрываем порт 8000 внутри и снаружи
+    ports:
+      - '6666:6666'
+    depends_on:
+      - web

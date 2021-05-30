@@ -7,6 +7,8 @@ from datetime import datetime
 
 import convertapi as convertapi
 
+import docker
+
 import zoom
 import outlook
 
@@ -82,6 +84,7 @@ class Item(BaseModel):
 class InterItem(BaseModel):
     title: str
     skills: List[str] = []
+    Competencies: str
     url: str
     id: str
     description: str
@@ -89,6 +92,12 @@ class InterItem(BaseModel):
 class Meet(BaseModel):
     zoom: str
     calendar: str
+
+class Cont_answer(BaseModel):
+    res: bool
+
+class Cont_ask(BaseModel):
+    image: str
 
 
 @app.get("/")
@@ -105,7 +114,7 @@ async def read_item(id: str = ""):
             if id in j['id']:
                 return j
 
-@app.post("/getInter")
+@app.post("/getInter", response_model=List[InterItem])
 async def getInter(file: UploadFile = File(...)):
     str = ""
     if file.filename:
@@ -120,5 +129,9 @@ async def getInter(file: UploadFile = File(...)):
 @app.post("/addMeet", response_model=Meet)
 async def getInter(item: Item):
     url = zoom.create_meet(item.name, item.time, item.duration, item.password)
-    outlook.addEvent(item.name, url, item.time, item.duration)
-    return {"zoom": url, "calendar": "https://calendar.google.com/calendar/ical/mkpev6k1kqj93lof61gdb8b9tk%40group.calendar.google.com/public/basic.ics"}
+    cal_url = outlook.addEvent(item.name, url, item.time, item.duration)
+    return {"zoom": url, "calendar": cal_url}
+
+@app.post("/runCont", response_model=Cont_answer)
+async def runCont(cont: Cont_ask):
+        return {docker.runCont("shureck/userback")}

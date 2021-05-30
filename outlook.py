@@ -76,8 +76,9 @@ def addEvent(name, desc_url, time, duration):
     }
 
     event = service.events().insert(calendarId='mkpev6k1kqj93lof61gdb8b9tk@group.calendar.google.com', body=event).execute()
-    print('Event created: %s' % (event.get('htmlLink')))
+    # print('Event created: %s' % (event.get('iCalUID')))
+    return event.get('iCalUID')
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     print(addEvent("ere","efefe",datetime.now(),50.0))
