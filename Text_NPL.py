@@ -3,6 +3,8 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 import json
 import difflib
+import semantic
+import re
 
 def similarity(s1, s2):
     normalized1 = s1.lower()
@@ -17,12 +19,10 @@ def line_numbers(sentens, word_list):
     sum = 0
     arr = {}
     test = 0
-
-    for word in word_list:
-        sum = 0
-        for ww in sentens:
-            sum += similarity(word, ww)
-            arr[word] = sum
+    word_list = ' '.join(word_list)
+    for ww in sentens:
+        sum += similarity(word_list, ww)
+        arr[word_list] = sum
 
     for i in arr.values():
         test += i
@@ -47,9 +47,8 @@ def init():
 def getIntUrl(text):
     stopWords = set(stopwords.words("russian"))
     read_file = text
-
-    read_file = read_file.replace("&nbsp", "\n")
     text = nltk.word_tokenize(read_file)
+    clastered_text = " ".join(semantic.main(read_file))
 
     wordsFiltered = []
 
@@ -57,7 +56,7 @@ def getIntUrl(text):
         if w not in stopWords:
             wordsFiltered.append(w)
 
-    cit = find_country(wordsFiltered,["Ангарск","Москва","Вся Россия"])
+    cit = find_country(clastered_text,["Ангарск","Москва","Вся Россия"])
     #print("Testt",len(text),text)
     with open('city.json', 'r', encoding='utf-8') as fp:
         city_data = fp.read()
@@ -68,10 +67,14 @@ def getIntUrl(text):
             #print(i['topics'])
             topics = i['topics']
 
+    comp = clastered_text.split('Навыки')[1]
+    for i in topics:
+        i['Competencies'] = re.sub(r'\s+', ' ', comp)
+
     arr = {}
     for num,i in enumerate(topics,start=0):
         # print(line_numbers(read_file, i['skills']))
-        arr[str(num)] = line_numbers(read_file, i['skills'])
+        arr[str(num)] = line_numbers(clastered_text, i['skills'])
     arr = sort(arr)
     # print(arr[-1])
     data_json = []
@@ -84,8 +87,7 @@ def sort(d):
     list_d.sort(key=lambda i: i[1])
     return list_d
 
-
-ff = "NLTK.txt"
-with open(ff, 'r', encoding='utf-8') as fh:
-    tex = fh.read()
-    getIntUrl(tex)
+# ff = "NLTK.txt"
+# with open(ff, 'r', encoding='utf-8') as fh:
+#     tex = fh.read()
+#     print(getIntUrl(tex))
