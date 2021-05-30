@@ -131,7 +131,3 @@ async def getInter(item: Item):
     url = zoom.create_meet(item.name, item.time, item.duration, item.password)
     cal_url = outlook.addEvent(item.name, url, item.time, item.duration)
     return {"zoom": url, "calendar": cal_url}
-
-@app.post("/runCont", response_model=Cont_answer)
-async def runCont(cont: Cont_ask):
-        return {docker.runCont("shureck/userback")}
